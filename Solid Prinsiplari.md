@@ -4,11 +4,8 @@
 > qo'llaniladigan tamoyillar to'plami. Har bir harfi muhim dizayn printsipini anglatadi. Bu tamoyillar kodni o'qish,
 > testlash, kengaytirish va texnik xizmat ko'rsatishni osonlashtirish uchun ishlatiladi.
 >
-> - `S - Single Responsibility Principle (SRP)` - Yagona javobgarlik tamoyili shuni anglatadiki, har bir sinf faqat
-    bitta
-    mas'uliyatga ega bo'lishi kerak. Agar sinf bitta muammo uchun javobgar bo'lsa, uni osonroq boshqarish, sinovdan
-    o'tkazish va tushunish mumkin. <br>
-    > Masalan:
+> - `S - Single Responsibility Principle (SRP)` - Yagona javobgarlik tamoyili shuni anglatadiki, har bir sinf faqat bitta mas'uliyatga ega bo'lishi kerak. Agar sinf bitta muammo uchun javobgar bo'lsa, uni osonroq boshqarish, sinovdan o'tkazish va tushunish mumkin. <br>
+    Masalan:
 
 ```
 Noto'g'ri kod:
@@ -40,9 +37,7 @@ class ProductRepository {
 
 ```
 
-> - `O — Open/Closed Principle (OCP)` - Ochiq/Yopiq printsipi — sinflar o'zgartirish uchun yopiq, lekin kengaytirish
-    uchun ochiq bo'lishi kerak. Ya'ni, mavjud sinfni o'zgartirmasdan, yangi funksiyalarni qo'shish mumkin bo'lishi
-    kerak.
+> - `O — Open/Closed Principle (OCP)` - Ochiq/Yopiq printsipi — sinflar o'zgartirish uchun yopiq, lekin kengaytirish uchun ochiq bo'lishi kerak. Ya'ni, mavjud sinfni o'zgartirmasdan, yangi funksiyalarni qo'shish mumkin bo'lishi kerak.
 
 ```
 Noto'g'ri kod:
@@ -95,17 +90,48 @@ echo $res->calculateDiscount();  ## 10
 ```
 
 > - `L — Liskov Substitution Principle (LSP)` - Liskov almashtirish printsipi — agar S sinfi T sinfiga o'rinbosar bo'
-    lsa,
-    T sinfning xatti-harakati S sinfi tomonidan o'zgartirilmasdan foydalanilishi kerak. Ya'ni, ota sinfning obyektlari
-    o‘rniga farzand sinflarining obyektlari qo‘llanilganda dastur to‘g‘ri ishlashi kerak.
+    lsa, T sinfning xatti-harakati S sinfi tomonidan o'zgartirilmasdan foydalanilishi kerak. Ya'ni, ota sinfning obyektlari o‘rniga farzand sinflarining obyektlari qo‘llanilganda dastur to‘g‘ri ishlashi kerak. <br>
+> - "Har qanday ob'ekt, agar uning klassi yuqori klassdan meros olgan bo'lsa, bu ob'ekt yuqori klassdagi ob'ektlar o'rnini to'liq bosishi mumkin bo'lishi kerak, hech qanday xatti-harakatlarni o'zgartirmasdan yoki buzmasdan." <br>
+> - Boshqacha qilib aytganda, agar B klassi A klassidan meros olsa, unda A klassini ishlatadigan dastur B klassini ishlatganda ham xuddi shunday ishlashi kerak. Quyi klasslar yuqori klassning o'rniga osonlik bilan ishlatilishi kerak, bu esa polimorfizmga mos keladi. Boshqacha qilib aytganda, biz har doim quyi sinfni yuqori sinf o'rnida ishlatishimiz kerak, va tizim xuddi yuqori sinfni ishlatgandek to'g'ri ishlashi kerak."
+
+> - **Masalan**: "Masalan, agar bizda Vehicle degan umumiy sinf bo'lsa va uning Car, Motorcycle, va Bicycle kabi quyi sinflari bo'lsa, bu quyi sinflar umumiy xatti-harakatlarni saqlashi kerak. Avtomobil va mototsiklda dvigatel bor va ularni ishga tushirishimiz mumkin (startEngine() metodi), lekin velosipedda dvigatel yo'q. Agar biz velosipedga ham startEngine() metodini kiritishga majbur qilsak, bu LSP tamoyilini buzadi, chunki velosipedning xatti-harakati mantiqan avtomobil yoki mototsikl bilan mos kelmaydi."
+> - **LSPning Maqsadi** - "LSPning asosiy maqsadi — kodni kengaytirish va qayta ishlashni osonlashtirish. Agar quyi sinf yuqori sinfning xatti-harakatlarini saqlab qolsa, kodda mantiqiy xatolarni kamaytirish mumkin bo'ladi. Bu esa tizimni barqaror, modulli va kengaytirishga yaroqli qiladi."
+
+```
+// Asosiy Transport klassi
+class Vehicle {
+    public function move() {
+        return "Moving";
+    }
+}
+
+// Dvigatelli transport vositalari uchun interfeys
+interface EngineVehicle {
+    public function startEngine();
+}
+
+// Avtomobil dvigatelli transport vositasi
+class Car extends Vehicle implements EngineVehicle {
+    public function startEngine() {
+        return "Car engine started";
+    }
+}
+
+// Mototsikl dvigatelli transport vositasi
+class Motorcycle extends Vehicle implements EngineVehicle {
+    public function startEngine() {
+        return "Motorcycle engine started";
+    }
+}
+
+// Velosiped dvigatelsiz transport vositasi
+class Bicycle extends Vehicle {
+    // Velosipedda dvigatel yo'q, shuning uchun startEngine metodini amalga oshirish shart emas
+}
 
 ```
 
-```
-
-> - `I — Interface Segregation Principle (ISP)` - Interfeysni ajratish printsipi — mijozlar ular foydalanmaydigan
-    metodlarga bog'liq bo'lmasliklari kerak. Ya'ni, katta interfeyslarni kichikroq, aniq maqsadli interfeyslarga bo'lish
-    kerak. <br>
+> - `I — Interface Segregation Principle (ISP)` - Interfeysni ajratish printsipi — mijozlar ular foydalanmaydigan metodlarga bog'liq bo'lmasliklari kerak. Ya'ni, katta interfeyslarni kichikroq, aniq maqsadli interfeyslarga bo'lish kerak. <br>
 > #### Misol:
 > Agar sizda printer uchun interfeys bo'lsa, u juda ko'p turli metodlarga ega bo'lishi mumkin. Lekin har doim ham barcha
 > printerlar bu metodlarni qo'llay olmasligi mumkin.
@@ -205,9 +231,7 @@ $multiFunctionPrinter->faxDocument();   // Output: Fax from Multi-function print
 
 ```
 
-> - `D — Dependency Inversion Principle (DIP)` - Bog'liqlikni teskari aylantirish printsipi — yuqori darajali modullar
-    past darajali modullarga bog'liq bo'lmasligi kerak. Ikkalasi ham abstraktsiyalarga bog'liq bo'lishi kerak. Bu,
-    asosan, sinflarni bevosita bir-biriga bog'liq qilishdan qochish uchun ishlatiladi.
+> - `D — Dependency Inversion Principle (DIP)` - Bog'liqlikni teskari aylantirish printsipi — yuqori darajali modullar past darajali modullarga bog'liq bo'lmasligi kerak. Ikkalasi ham abstraktsiyalarga bog'liq bo'lishi kerak. Bu, asosan, sinflarni bevosita bir-biriga bog'liq qilishdan qochish uchun ishlatiladi.
 
 ```
 // Abstraktsiya (Interfeys)
