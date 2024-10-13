@@ -2,22 +2,15 @@
 
 > - Konstruktsion (yaratuvchi) patternlar (`Creational Patterns`) <br>
     **Vazifasi**: Obyektlarni yaratish jarayonini soddalashtirish va boshqarish uchun ishlatiladi. <br>
-    **Misol**: Tasavvur qiling, sizning loyihangizda turli xil mashinalar (avtomobillar) mavjud va har safar yangi
-    mashina
-    yaratmoqchi bo'lganingizda, siz turli xil xususiyatlarga ega bo'lgan obyektlarni yaratishingiz kerak. Buning uchun
-    konstruktsion patternlar yordamida obyekt yaratish jarayonini soddalashtirish mumkin.
+    **Misol**: Tasavvur qiling, sizning loyihangizda turli xil mashinalar (avtomobillar) mavjud va har safar yangi mashina yaratmoqchi bo'lganingizda, siz turli xil xususiyatlarga ega bo'lgan obyektlarni yaratishingiz kerak. Buning uchun konstruktsion patternlar yordamida obyekt yaratish jarayonini soddalashtirish mumkin.
 > - Strukturaviy patternlar (`Structural Patterns`)
 > - Xulq-atvor patternlari (`Behavioral Patterns`)
 
 > ### Konstruktsion patternlar (Creational Patterns)
-> - `Singleton pattern` - Singleton patterni bir obyektni faqat bitta nusxasini yaratishga imkon beradi va unga butun
-    dastur davomida kirishni ta’minlaydi. <br>
+> - `Singleton pattern` - Singleton patterni bir obyektni faqat bitta nusxasini yaratishga imkon beradi va unga butun dastur davomida kirishni ta’minlaydi. <br>
     **Vazifasi**: Biror tizim yoki sinf faqat bitta obyektga ega bo'lishi kerak bo'lgan holatlarda ishlatiladi (
     masalan, ma'lumotlar bazasi bilan bog'lanish). <br>
-    Maqsadi: ba’zi hollarda dastur davomida faqat bitta obyekt mavjud bo‘lishi kerak bo‘lgan sinflarni boshqarishdir.
-    Misol uchun, konfiguratsion ma’lumotlar, log faylga yozuvlar yoki ma’lumotlar bazasiga ulanish uchun har safar yangi
-    obyekt yaratishning zaruriyati yo‘q. Bitta yaratilgan obyekt orqali hamma joyda foydalanish yanada optimal
-    hisoblanadi. <br>
+    Maqsadi: ba’zi hollarda dastur davomida faqat bitta obyekt mavjud bo‘lishi kerak bo‘lgan sinflarni boshqarishdir. Misol uchun, konfiguratsion ma’lumotlar, log faylga yozuvlar yoki ma’lumotlar bazasiga ulanish uchun har safar yangi obyekt yaratishning zaruriyati yo‘q. Bitta yaratilgan obyekt orqali hamma joyda foydalanish yanada optimal hisoblanadi. <br>
     **Misol**:
 
 ```
@@ -54,11 +47,9 @@ self::$instance tekshiriladi: self::$instance === null bo'lsa, yangi obyekt yara
 Agar obyekt allaqachon mavjud bo'lsa, self::$instance ning qiymati qaytariladi va yangi obyekt yaratishning hojati bo'lmaydi.
 ```
 
-> - `Factory pattern` - Factory patterni obyektlarni yaratishni soddalashtirish uchun ishlatiladi. Sizga kerakli
-    obyektni
-    sinfni aniq belgilamasdan yaratishga imkon beradi. <br>
-    **Vazifasi**: Agar dasturingizda turli xil obyektlar yaratishingiz kerak bo'lsa, lekin ular qanday sinfdan kelganini
-    aniq bilmasangiz, bu pattern yordam beradi.
+> - `Factory pattern` - Factory patterni obyektlarni yaratishni soddalashtirish uchun ishlatiladi. Sizga kerakli obyektni sinfni aniq belgilamasdan yaratishga imkon beradi. <br>
+> - `Factory pattern` - murakkab obyektlarni yaratishni soddalashtiradi va qaysi sinfni yaratish kerakligini qaror qilishni markazlashtiradi.
+    > Bu patternda obyektni yaratish uchun maxsus factory sinfi ishlatiladi
 
 ```
 
@@ -114,8 +105,7 @@ echo $car2->getType(); // "SUV avtomobili" chiqadi
 > ## Strukturaviy patternlar (Structural Patterns)
 > **Vazifasi**: Obyektlar yoki sinflar o'rtasidagi bog'lanishni soddalashtirish va ulardan yaxshiroq foydalanishni
 > ta'minlash uchun ishlatiladi. Kod modularligini va ishlashini yaxshilashga qaratilgan.
->  - `Adapter pattern` - Manosi: Adapter patterni ikkita o'xshash bo'lmagan interfeyslarni moslashtirish va ularni
-     birgalikda ishlashini ta'minlash uchun ishlatiladi. <br>
+>  - `Adapter pattern` - Manosi: Adapter patterni turli interfeyslarni moslashtirish va ularni birgalikda ishlashini ta'minlash uchun ishlatiladi. <br>
      **Vazifasi**: Misol uchun, eski va yangi tizimlar orasida integratsiya qilishda moslama vazifasini bajaradi.
 
 ```
@@ -142,10 +132,8 @@ echo $adapter->newRequest(); // "Eski tizimdan so'rov" qaytaradi
 
 ```
 
-> - `Decorator pattern` - Manosi: Decorator patterni obyektning funksionalligini dinamik ravishda kengaytirish yoki
-    o'zgartirish uchun ishlatiladi. <br>
-    **Vazifasi**: Misol uchun, sizga biror mahsulotga qo‘shimcha xizmatlarni qo‘shish kerak bo‘lsa, asl sinfni
-    o‘zgartirmasdan dekorator orqali bu vazifani bajarishingiz mumkin.
+> - `Decorator pattern` - Manosi: Decorator patterni obyektning funksionalligini dinamik ravishda kengaytirish (qo'shish) uchun ishlatiladi <br>
+    **Vazifasi**: Misol uchun, sizga biror mahsulotga qo‘shimcha xizmatlarni qo‘shish kerak bo‘lsa, asl sinfni o‘zgartirmasdan dekorator orqali bu vazifani bajarishingiz mumkin.
 
 ```
 interface Coffee {
@@ -179,11 +167,9 @@ echo $coffee->cost(); // Narxi 1500 bo'ladi (1000+500)
 > **Vazifasi** Obyektlar qanday qilib bir-biri bilan muloqot qilishini va ularning harakatlarini qanday
 > muvofiqlashtirishni
 > osonlashtiradi.
-> - `Observer pattern` - Manosi: Observer patterni biror obyektning holati o'zgarganda unga bog'langan boshqa
-    obyektlarni avtomatik ravishda xabardor qilishga imkon beradi. <br>
-    **Vazifasi**: Bu pattern yangiliklar yoki o'zgarishlarni kuzatish va shu holatda javob qaytarish kerak bo'lgan
-    hollarda
-    ishlatiladi.
+> - `Observer pattern` - Manosi: Observer patterni biror obyektning holati o'zgarganda unga bog'langan boshqa obyektlarni avtomatik ravishda xabardor qilishga imkon beradi. <br>
+    **Vazifasi**: Bu pattern yangiliklar yoki o'zgarishlarni kuzatish va shu holatda javob qaytarish kerak bo'lgan hollarda ishlatiladi.
+> - `Observer pattern` - bir obyektning holati o'zgarganda boshqa obyektlarga habar berish uchun ishlatiladi. Bu pattern obyektlar o'rtasida bir birini kuzatishni taminlaydi
 
 > #### Observer Pattern nima? <br>
 > `Observer pattern` — bu bir obyektni kuzatayotgan boshqa obyektlarni xabardor qilish uchun ishlatiladigan dizayn patterni.
@@ -199,8 +185,6 @@ echo $coffee->cost(); // Narxi 1500 bo'ladi (1000+500)
 > - Yangilik kelganda sizga xabar beriladi — bu kuzatuvchilarni xabardor qilish jarayoni. <br>
 > #### Patternning maqsadi:
 > - Patternning maqsadi shundaki, asosiy obyekt o'zgarganida kuzatuvchilar avtomatik ravishda bu o'zgarishni bilib oladilar. Har safar kuzatuvchilarni qo'lda xabardor qilish shart emas.
-
-
 
 ```
 interface Observer {
@@ -317,11 +301,8 @@ $newsAgency->addNews("MySQL 8.0 yangilandi!");
 
 ```
 
-> - `Strategy pattern` - Manosi: Strategy patterni turli xil algoritmlar orasidan kerakli birini tanlab qo‘llash
-    imkonini beradi. Har bir algoritm alohida sinf sifatida ajratiladi va ularni oson almashtirish mumkin bo'ladi.<br>
-    **Vazifasi**: Masalan, to‘lov tizimlarida (kredit karta, PayPal va boshqalar) har bir to‘lov usulini har xil
-    ko‘rinishda
-    qo‘llash uchun ishlatiladi.
+> - `Strategy pattern` - Manosi: Strategy patterni turli xil algoritmlar orasidan kerakli birini tanlab qo‘llash imkonini beradi. Har bir algoritm alohida sinf sifatida ajratiladi va ularni oson almashtirish mumkin bo'ladi.<br>
+    **Vazifasi**: Masalan, to‘lov tizimlarida (kredit karta, PayPal va boshqalar) har bir to‘lov usulini har xil ko‘rinishda qo‘llash uchun ishlatiladi.
 
 ```
 interface PaymentStrategy {
@@ -361,9 +342,6 @@ $payment->process(100); // PayPal orqali to'lov amalga oshiradi
 
 > - Qayta foydalanish imkoniyati: Patternlar ko'p marta ishlatiladigan kodning oldindan ishlab chiqilgan echimlari bo'
     lib, yangi muammolar uchun ham foydalaniladi.
-> - Modularlik: Kodni modullarga ajratish orqali unga keyinchalik o'zgartirishlar kiritish yoki kengaytirish
-    osonlashadi.
-> - Ko'rinish va tushunarlilik: Dasturdagi murakkab jarayonlarni patternlar orqali soddalashtirib, kodni yaxshiroq
-    tushunish imkoniyati yaratiladi.
-> - Qisqartirish: Patternlar yordamida keraksiz takroriy kodlarni kamaytirish va ma'lum bir muammoni hal qilish uchun
-    optimal yechim yaratish mumkin.
+> - Modularlik: Kodni modullarga ajratish orqali unga keyinchalik o'zgartirishlar kiritish yoki kengaytirish osonlashadi.
+> - Ko'rinish va tushunarlilik: Dasturdagi murakkab jarayonlarni patternlar orqali soddalashtirib, kodni yaxshiroq tushunish imkoniyati yaratiladi.
+> - Qisqartirish: Patternlar yordamida keraksiz takroriy kodlarni kamaytirish va ma'lum bir muammoni hal qilish uchun optimal yechim yaratish mumkin.
