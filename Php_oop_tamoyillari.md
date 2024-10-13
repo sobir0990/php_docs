@@ -4,7 +4,7 @@
 
 > Ob'ektga yo'naltirilgan dasturlas[middle.md](middle.md)h (OOP) asosan to'rtta asosiy tamoyilga bo'linadi. Ushbu tamoyillar dasturchilarga samarali, o'qilishi oson va qayta ishlatiladigan kod yozish imkonini beradi. Keling, har bir tamoyilni batafsil ko'rib chiqamiz:
 > - `Inkapsulyatsiya (Encapsulation)` Bu tamoyil ob'ektning ichki holatini tashqi ta'sirlardan himoya qiladi.
-    > `Inkapsulyatsiya` yordamida ob'ekt ichidagi atributlar va metodlarga kirishni boshqarish mumkin. Ob'ektning ma'lumotlarini faqat uning metodlari orqali o'zgartirish va olish mumkin.
+    `Inkapsulyatsiya` yordamida ob'ekt ichidagi atributlar va metodlarga kirishni boshqarish mumkin. Ob'ektning ma'lumotlarini faqat uning metodlari orqali o'zgartirish va olish mumkin.
 
 ```
 class BankAccount {
@@ -67,24 +67,12 @@ echo $cat->speak(); // "Meow!"
 ```
 
 
-> - `Polimorfizm` asosan meros olish va interfeyslardan foydalanish orqali amalga oshiriladi. Quyidagi misollar orqali polimorfizmni tushuntirib beraman.
+> - PHP da `Polimorfizm` interfeyslar, abstrakt sinflar, va meros yordamida amalga oshiriladi. Bu tamoyil sinflar o'rtasida umumiy interfeys orqali ishlash imkoniyatini yaratadi, ya'ni bir xil metodlarni qo'llash orqali har xil sinflarning turli xatti-harakatlarini amalga oshirish mumkin.
+> - `Polimorfizm` asosan meros olish va interfeyslardan foydalanish orqali amalga oshiriladi.
 > - `Polimorfizm (Polymorphism)` bu bir xil interfeys orqali turli xil ob'ektlarga kirish imkoniyatidir.
 > - `Polimorfizm` bir xil interfeys orqali turli xil ob'ektlarga murojaat qilish imkonini beradi.
 
 ```
-function makeSound(Animal $animal) {
-    echo $animal->speak(); // Har qanday Animal uchun speak() metodini chaqirish
-}
-
-$dog = new Dog();
-$cat = new Cat();
-
-makeSound($dog); // "Woof!"
-makeSound($cat); // "Meow!"
-
-
-
-__________________
 // Umumiy interfeys
 interface PaymentMethod {
     public function pay($amount);
@@ -130,8 +118,8 @@ processPayment($creditCard, 300);     // Paid 300 using Credit Card.
 ```
 
 > - `Abstraksiya (Abstraction)` bu murakkab tizimlarni oddiy shaklda ifodalash imkoniyatidir. Abstraksiya yordamida tizimning muhim xususiyatlarini ajratib ko'rsatish va keraksiz tafsilotlarni yashirish mumkin.
-    > `Abstrakt` klasslar yoki interfeyslar yordamida dasturchilar bir xil usullarni ishlatadigan turli klasslar uchun umumiy interfeys yaratadilar.\
-    > `Misol`: Bir qator avtomobillar uchun Vehicle interfeysini yaratish va unda start() va stop() metodlarini ta'riflash.
+    `Abstrakt` klasslar yoki interfeyslar yordamida dasturchilar bir xil usullarni ishlatadigan turli klasslar uchun umumiy interfeys yaratadilar.\
+    `Misol`: Bir qator avtomobillar uchun Vehicle interfeysini yaratish va unda start() va stop() metodlarini ta'riflash.
 > #### Hulosa
 > Abstraksiya dasturlash jarayonini sodda va aniq qilish, xususiyatlarni ajratish, moslashuvchanlikni oshirish va bir xil interfeys orqali turli ob'ektlar bilan ishlashni osonlashtirish uchun juda muhim vositadir. Real loyihalarda abstraksiyaning to'g'ri ishlatilishi dasturiy ta'minotning sifatini va samaradorligini oshiradi.
 

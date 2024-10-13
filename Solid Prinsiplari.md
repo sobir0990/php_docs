@@ -89,49 +89,40 @@ echo $res->calculateDiscount();  ## 10
  
 ```
 
-> - `L — Liskov Substitution Principle (LSP)` - Liskov almashtirish printsipi — agar S sinfi T sinfiga o'rinbosar bo'
-    lsa, T sinfning xatti-harakati S sinfi tomonidan o'zgartirilmasdan foydalanilishi kerak. Ya'ni, ota sinfning obyektlari o‘rniga farzand sinflarining obyektlari qo‘llanilganda dastur to‘g‘ri ishlashi kerak. <br>
+> - `L — Liskov Substitution Principle (LSP)` -LSP: "Agar S sinfi T sinfining vorisi bo'lsa, u holda T sinfining obyekti ishlatiladigan har qanday joyda S sinfining obyekti ham ishlatilishi kerak va dastur xulq-atvori o'zgarmasligi kerak."
 > - "Har qanday ob'ekt, agar uning klassi yuqori klassdan meros olgan bo'lsa, bu ob'ekt yuqori klassdagi ob'ektlar o'rnini to'liq bosishi mumkin bo'lishi kerak, hech qanday xatti-harakatlarni o'zgartirmasdan yoki buzmasdan." <br>
 > - Boshqacha qilib aytganda, agar B klassi A klassidan meros olsa, unda A klassini ishlatadigan dastur B klassini ishlatganda ham xuddi shunday ishlashi kerak. Quyi klasslar yuqori klassning o'rniga osonlik bilan ishlatilishi kerak, bu esa polimorfizmga mos keladi. Boshqacha qilib aytganda, biz har doim quyi sinfni yuqori sinf o'rnida ishlatishimiz kerak, va tizim xuddi yuqori sinfni ishlatgandek to'g'ri ishlashi kerak."
 
-> - **Masalan**: "Masalan, agar bizda Vehicle degan umumiy sinf bo'lsa va uning Car, Motorcycle, va Bicycle kabi quyi sinflari bo'lsa, bu quyi sinflar umumiy xatti-harakatlarni saqlashi kerak. Avtomobil va mototsiklda dvigatel bor va ularni ishga tushirishimiz mumkin (startEngine() metodi), lekin velosipedda dvigatel yo'q. Agar biz velosipedga ham startEngine() metodini kiritishga majbur qilsak, bu LSP tamoyilini buzadi, chunki velosipedning xatti-harakati mantiqan avtomobil yoki mototsikl bilan mos kelmaydi."
-> - **LSPning Maqsadi** - "LSPning asosiy maqsadi — kodni kengaytirish va qayta ishlashni osonlashtirish. Agar quyi sinf yuqori sinfning xatti-harakatlarini saqlab qolsa, kodda mantiqiy xatolarni kamaytirish mumkin bo'ladi. Bu esa tizimni barqaror, modulli va kengaytirishga yaroqli qiladi."
+> - **LSPning Maqsadi** - To'g'ri vorislikni ta'minlash: Voris sinflar ota sinfning xatti-harakatini buzmasligi kerak. Kodda voris sinfni ota sinf sifatida almashtirish orqali kodni dinamik boshqarish mumkin bo'lishi kerak.
+> - **Misol Sparrow** - klassi Bird sinfining vorisi va u ota sinfning barcha xatti-harakatlarini to'liq takrorlaydi. Shuning uchun, har qanday joyda Bird klassi kerak bo'lsa, Sparrow klassi ham o'sha joyda muammosiz ishlaydi.
 
 ```
-// Asosiy Transport klassi
-class Vehicle {
-    public function move() {
-        return "Moving";
+// Asosiy sinf
+class Bird {
+    public function fly() {
+        echo "I am flying!";
     }
 }
 
-// Dvigatelli transport vositalari uchun interfeys
-interface EngineVehicle {
-    public function startEngine();
-}
-
-// Avtomobil dvigatelli transport vositasi
-class Car extends Vehicle implements EngineVehicle {
-    public function startEngine() {
-        return "Car engine started";
+// Voris sinf
+class Sparrow extends Bird {
+    public function fly() {
+        echo "I am flying like a sparrow!";
     }
 }
 
-// Mototsikl dvigatelli transport vositasi
-class Motorcycle extends Vehicle implements EngineVehicle {
-    public function startEngine() {
-        return "Motorcycle engine started";
-    }
+// Foydalanish:
+function makeBirdFly(Bird $bird) {
+    $bird->fly();
 }
 
-// Velosiped dvigatelsiz transport vositasi
-class Bicycle extends Vehicle {
-    // Velosipedda dvigatel yo'q, shuning uchun startEngine metodini amalga oshirish shart emas
-}
+$bird = new Sparrow();
+makeBirdFly($bird); // Sparrow klassi Bird o'rnida ishlatilmoqda va to'g'ri ishlaydi
+
 
 ```
 
-> - `I — Interface Segregation Principle (ISP)` - Interfeysni ajratish printsipi — mijozlar ular foydalanmaydigan metodlarga bog'liq bo'lmasliklari kerak. Ya'ni, katta interfeyslarni kichikroq, aniq maqsadli interfeyslarga bo'lish kerak. <br>
+> `I — Interface Segregation Principle (ISP)` - Interfeysni ajratish printsipi — mijozlar ular foydalanmaydigan metodlarga bog'liq bo'lmasliklari kerak. Ya'ni, katta interfeyslarni kichikroq, aniq maqsadli interfeyslarga bo'lish kerak. <br>
 > #### Misol:
 > Agar sizda printer uchun interfeys bo'lsa, u juda ko'p turli metodlarga ega bo'lishi mumkin. Lekin har doim ham barcha
 > printerlar bu metodlarni qo'llay olmasligi mumkin.
@@ -232,7 +223,7 @@ $multiFunctionPrinter->faxDocument();   // Output: Fax from Multi-function print
 ```
 
 > - `D — Dependency Inversion Principle (DIP)` - Bog'liqlikni teskari aylantirish printsipi — yuqori darajali modullar past darajali modullarga bog'liq bo'lmasligi kerak. Ikkalasi ham abstraktsiyalarga bog'liq bo'lishi kerak. Bu, asosan, sinflarni bevosita bir-biriga bog'liq qilishdan qochish uchun ishlatiladi.
-
+> - **Misol**: “Misol uchun, agar bizda xabarlar yuboruvchi bir xizmat bo'lsa (NotificationService), bu xizmat faqat email yoki SMS uchun qattiq bog'liq bo'lishi shart emas. Aksincha, biz umumiy MessageSender interfeysidan foydalanamiz va har qanday yangi xabar turini qo'shish osonlashadi.”
 ```
 // Abstraktsiya (Interfeys)
 interface NotificationSender {
